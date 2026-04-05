@@ -2,7 +2,7 @@ name: Weekly Scrum Thread
 
 on:
   schedule:
-    - cron: "0 10 * * 5"  # 테스트: 일요일 09:40 UTC = 18:40 KST
+    - cron: "0 10 * * 5"  # 매주 금요일 10:00 UTC = 19:00 KST
   workflow_dispatch:       # 수동으로도 실행 가능
 
 jobs:
