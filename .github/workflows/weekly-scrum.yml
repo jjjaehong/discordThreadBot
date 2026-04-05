@@ -1,0 +1,28 @@
+name: Weekly Scrum Thread
+
+on:
+  schedule:
+    - cron: "0 10 * * 5"  # 매주 금요일 10:00 UTC = 19:00 KST
+  workflow_dispatch:       # 수동으로도 실행 가능
+
+jobs:
+  create-thread:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create weekly scrum thread
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+        run: node run-once.js
